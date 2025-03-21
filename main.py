@@ -1,6 +1,9 @@
 import asyncio
 import logging
 import os
+import random
+import pandas as pd
+import numpy as np
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
@@ -8,7 +11,10 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.filters.callback_data import CallbackData
-
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from aiogram.fsm.state import State, StatesGroup
+from typing import Dict, Any
 # Загружаем переменные из .env
 load_dotenv()
 TOKEN = os.getenv("BOT_TOKEN")
@@ -54,6 +60,7 @@ main_menu_kb = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text="🆘 Техподдержка", callback_data="support_request")],
     [InlineKeyboardButton(text="🎁 Подарочные карты", callback_data="gift_cards")],
     [InlineKeyboardButton(text="🛒 Как оформить заказ", callback_data="how_to_order")],
+    
     [InlineKeyboardButton(text="❌ Отменить заказ", callback_data="cancel_order")],
     [InlineKeyboardButton(text="🛍️ Консультация по товару", callback_data="product_consultation")],
     [InlineKeyboardButton(text="🎯 Рекомендации", callback_data="product_recommendations")],
