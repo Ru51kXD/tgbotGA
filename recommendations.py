@@ -161,6 +161,76 @@ def init_db():
                      "longevity": "long",  # Стойкость: долгая
                      "season": ["summer", "autumn"],  # Сезон: лето, осень
                      "price": "premium"  # Ценовая категория: премиум
+                 })),
+                # Румяна
+                (11, 'Румяна гелевые Rose Glow', 'blush', 2500, 4.6,
+                 json.dumps({
+                     "texture": "gel",  # Текстура: гелевые
+                     "color": "nude",   # Цвет: нюдовые оттенки
+                     "price": "medium"  # Ценовая категория: средняя
+                 })),
+                (12, 'Румяна пудровые Bright Berry', 'blush', 3200, 4.4,
+                 json.dumps({
+                     "texture": "powder",  # Текстура: пудровые
+                     "color": "bright",    # Цвет: яркие оттенки
+                     "price": "medium"     # Ценовая категория: средняя
+                 })),
+                (13, 'Румяна кремовые Peachy', 'blush', 2800, 4.7,
+                 json.dumps({
+                     "texture": "cream",  # Текстура: кремовые
+                     "color": "nude",     # Цвет: нюдовые оттенки
+                     "price": "medium"    # Ценовая категория: средняя
+                 })),
+                # Хайлайтер
+                (14, 'Хайлайтер жидкий Golden Glow', 'highlighter', 3500, 4.8,
+                 json.dumps({
+                     "texture": "liquid",  # Текстура: жидкий
+                     "shade": "warm",      # Оттенки: теплые
+                     "price": "medium"     # Ценовая категория: средняя
+                 })),
+                (15, 'Хайлайтер стик Silver Light', 'highlighter', 2900, 4.5,
+                 json.dumps({
+                     "texture": "stick",  # Текстура: стик
+                     "shade": "cool",     # Оттенки: холодные
+                     "price": "medium"    # Ценовая категория: средняя
+                 })),
+                (16, 'Хайлайтер пудровый Pearl Shine', 'highlighter', 3800, 4.9,
+                 json.dumps({
+                     "texture": "powder",  # Текстура: пудровый
+                     "shade": "warm",      # Оттенки: теплые
+                     "price": "medium"     # Ценовая категория: средняя
+                 })),
+                # Пудра
+                (17, 'Пудра рассыпчатая Transparent', 'powder', 2200, 4.3,
+                 json.dumps({
+                     "texture": "loose",      # Текстура: рассыпчатая
+                     "shade": "transparent",  # Оттенки: прозрачная
+                     "price": "medium"        # Ценовая категория: средняя
+                 })),
+                (18, 'Пудра прессованная Beige', 'powder', 2700, 4.6,
+                 json.dumps({
+                     "texture": "pressed",  # Текстура: прессованная
+                     "shade": "tinted",     # Оттенки: тонированная
+                     "price": "medium"      # Ценовая категория: средняя
+                 })),
+                # Тени
+                (19, 'Тени сухие Nude Palette', 'eyeshadow', 2400, 4.5,
+                 json.dumps({
+                     "texture": "dry",    # Текстура: сухие
+                     "shade": "nude",     # Оттенки: нюдовые
+                     "price": "medium"    # Ценовая категория: средняя
+                 })),
+                (20, 'Тени жидкие Bright Color', 'eyeshadow', 3100, 4.7,
+                 json.dumps({
+                     "texture": "liquid",  # Текстура: жидкие
+                     "shade": "bright",    # Оттенки: яркие
+                     "price": "medium"     # Ценовая категория: средняя
+                 })),
+                (21, 'Тени сухие Smoky Eyes', 'eyeshadow', 2800, 4.8,
+                 json.dumps({
+                     "texture": "dry",    # Текстура: сухие
+                     "shade": "bright",   # Оттенки: яркие
+                     "price": "medium"    # Ценовая категория: средняя
                  }))
             ]
             
@@ -234,7 +304,9 @@ def get_category_criteria_keyboard(category: str, selected_criteria: list = None
         "brush": "🖌️",  # Щеточка
         "price": "💰",  # Цена
         "intensity": "💪",  # Интенсивность
-        "season": "🍃"   # Сезон
+        "season": "🍃",   # Сезон
+        "texture": "🏷️",  # Текстура
+        "shade": "🌈"   # Оттенки
     }
     
     # Для каждой группы критериев создаем заголовок и кнопки
@@ -286,6 +358,7 @@ def get_category_criteria_keyboard(category: str, selected_criteria: list = None
                 elif criteria_id == "red": criteria_emoji = "❤️ "
                 elif criteria_id == "berry": criteria_emoji = "🍓 "
                 elif criteria_id == "pink": criteria_emoji = "💗 "
+                elif criteria_id == "bright": criteria_emoji = "🌟 "
             elif criteria_group == "brush":
                 if criteria_id == "silicone": criteria_emoji = "🔬 "
                 elif criteria_id == "curved": criteria_emoji = "↪️ "
@@ -303,6 +376,20 @@ def get_category_criteria_keyboard(category: str, selected_criteria: list = None
                 elif criteria_id == "summer": criteria_emoji = "☀️ "
                 elif criteria_id == "autumn": criteria_emoji = "🍂 "
                 elif criteria_id == "winter": criteria_emoji = "❄️ "
+            elif criteria_group == "texture":
+                if criteria_id == "gel": criteria_emoji = "🧴 "
+                elif criteria_id == "powder": criteria_emoji = "💎 "
+                elif criteria_id == "cream": criteria_emoji = "🍦 "
+                elif criteria_id == "liquid": criteria_emoji = "💧 "
+                elif criteria_id == "stick": criteria_emoji = "🖍️ "
+                elif criteria_id == "loose": criteria_emoji = "💨 "
+                elif criteria_id == "pressed": criteria_emoji = "⬜ "
+                elif criteria_id == "dry": criteria_emoji = "🌪️ "
+            elif criteria_group == "shade":
+                if criteria_id == "cool": criteria_emoji = "❄️ "
+                elif criteria_id == "warm": criteria_emoji = "🔥 "
+                elif criteria_id == "transparent": criteria_emoji = "👻 "
+                elif criteria_id == "tinted": criteria_emoji = "🎨 "
                 
             criteria_buttons.append(InlineKeyboardButton(
                 text=f"{marker}{criteria_emoji}{criteria_name}",
@@ -430,6 +517,68 @@ class ProductCategories:
             "budget": "Бюджетная (до 3000р)",
             "medium": "Средняя (3000-5000р)",
             "premium": "Премиум (от 5000р)"
+        }
+    }
+
+    # Категория румян
+    BLUSH = {
+        "texture": {
+            "gel": "Гелевые",
+            "powder": "Пудровые", 
+            "cream": "Кремовые"
+        },
+        "color": {
+            "nude": "Нюдовые оттенки",
+            "bright": "Яркие оттенки"
+        },
+        "price": {
+            "medium": "Средняя (2000-10000р)"
+        }
+    }
+
+    # Категория хайлайтера
+    HIGHLIGHTER = {
+        "texture": {
+            "liquid": "Жидкий",
+            "stick": "Стик",
+            "powder": "Пудровый"
+        },
+        "shade": {
+            "cool": "Холодные",
+            "warm": "Теплые"
+        },
+        "price": {
+            "medium": "Средняя (2000-10000р)"
+        }
+    }
+
+    # Категория пудры
+    POWDER = {
+        "texture": {
+            "loose": "Рассыпчатая",
+            "pressed": "Прессованная"
+        },
+        "shade": {
+            "transparent": "Прозрачная",
+            "tinted": "Тонированная"
+        },
+        "price": {
+            "medium": "Средняя (2000-10000р)"
+        }
+    }
+
+    # Категория теней
+    EYESHADOW = {
+        "texture": {
+            "dry": "Сухие",
+            "liquid": "Жидкие"
+        },
+        "shade": {
+            "bright": "Яркие",
+            "nude": "Нюдовые"
+        },
+        "price": {
+            "medium": "Средняя (2000-10000р)"
         }
     }
 
@@ -736,6 +885,14 @@ def get_categories_keyboard() -> InlineKeyboardMarkup:
         ],
         [
             InlineKeyboardButton(text="🧴 Парфюм", callback_data="select_category_perfume"),
+            InlineKeyboardButton(text="🌸 Румяна", callback_data="select_category_blush")
+        ],
+        [
+            InlineKeyboardButton(text="✨ Хайлайтер", callback_data="select_category_highlighter"),
+            InlineKeyboardButton(text="🌟 Пудра", callback_data="select_category_powder")
+        ],
+        [
+            InlineKeyboardButton(text="👀 Тени", callback_data="select_category_eyeshadow"),
             InlineKeyboardButton(text="🔍 Другие категории", callback_data="more_categories")
         ],
         [InlineKeyboardButton(text="🔙 Назад в главное меню", callback_data="back_to_main")]
@@ -754,7 +911,16 @@ def format_recommendation(product: dict) -> str:
         str: Отформатированный текст с информацией о товаре
     """
     # Получаем эмодзи для категории товара
-    emoji = "💄" if product['category'] == 'lipstick' else "👁" if product['category'] == 'mascara' else "🧴"
+    category_emoji = {
+        'lipstick': '💄',
+        'mascara': '👁',
+        'perfume': '🧴',
+        'blush': '🌸',
+        'highlighter': '✨',
+        'powder': '🌟',
+        'eyeshadow': '👀'
+    }
+    emoji = category_emoji.get(product['category'], '🎀')
     
     # Создаем основной текст с названием и ценой
     text = f"{emoji} <b>{product['name']}</b>\n"
@@ -775,7 +941,9 @@ def format_recommendation(product: dict) -> str:
             "brush": "Щеточка",
             "price": "Ценовая категория",
             "intensity": "Интенсивность",
-            "season": "Сезон"
+            "season": "Сезон",
+            "texture": "Текстура",
+            "shade": "Оттенки"
         }
         
         # Словарь с эмодзи для групп атрибутов
@@ -788,7 +956,9 @@ def format_recommendation(product: dict) -> str:
             "brush": "🖌️",
             "price": "💰",
             "intensity": "💪",
-            "season": "🍃"
+            "season": "🍃",
+            "texture": "🏷️",
+            "shade": "🌈"
         }
         
         # Добавляем атрибуты в текст
@@ -916,6 +1086,10 @@ async def start_recommendations(callback: types.CallbackQuery, state: FSMContext
             [InlineKeyboardButton(text="💄 Помада", callback_data="category_lipstick")],
             [InlineKeyboardButton(text="👁️ Тушь для ресниц", callback_data="category_mascara")],
             [InlineKeyboardButton(text="🧴 Парфюм", callback_data="category_perfume")],
+            [InlineKeyboardButton(text="🌸 Румяна", callback_data="category_blush")],
+            [InlineKeyboardButton(text="✨ Хайлайтер", callback_data="category_highlighter")],
+            [InlineKeyboardButton(text="🌟 Пудра", callback_data="category_powder")],
+            [InlineKeyboardButton(text="👀 Тени", callback_data="category_eyeshadow")],
             [InlineKeyboardButton(text="🔙 Назад", callback_data="back_to_main")]
         ])
         
@@ -1348,7 +1522,11 @@ def get_category_name(category: str) -> str:
     categories = {
         "lipstick": "помады",
         "mascara": "туши для ресниц",
-        "perfume": "парфюма"
+        "perfume": "парфюма",
+        "blush": "румян",
+        "highlighter": "хайлайтера",
+        "powder": "пудры",
+        "eyeshadow": "теней"
     }
     return categories.get(category, category)
 
